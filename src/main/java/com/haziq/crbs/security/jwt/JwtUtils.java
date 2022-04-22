@@ -1,6 +1,6 @@
 package com.haziq.crbs.security.jwt;
 
-import com.haziq.crbs.security.services.user.UserDetailsImpl;
+import com.haziq.crbs.security.services.UserDetailsImpl;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,13 +22,13 @@ public class JwtUtils {
 
     public String generateJwtToken(Authentication authentication) {
 
-        UserDetailsImpl userPrincipal = (UserDetailsImpl) authentication.getPrincipal();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
         // how to build the jwt
         // if setSubject are changes to userPrincipal.getUsername(),
         // then the getUsernameFromJwtToken is going to parse username
         return Jwts.builder()
-                .setSubject((userPrincipal.getEmail()))
+                .setSubject((userDetails.getEmail()))
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
