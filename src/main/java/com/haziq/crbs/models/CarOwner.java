@@ -16,6 +16,15 @@ public class CarOwner extends User{
     @OneToMany(mappedBy = "carOwner")
     private Set<Car> cars;
 
+
+    public CarOwner() {
+    }
+
+    public CarOwner(String username, String password, String email, String phoneNumber, String companyName) {
+        super(username, password, email, phoneNumber);
+        this.companyName = companyName;
+    }
+
     public String getCompanyName() {
         return companyName;
     }

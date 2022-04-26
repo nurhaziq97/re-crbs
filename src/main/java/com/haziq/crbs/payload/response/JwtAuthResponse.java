@@ -13,6 +13,7 @@ public class JwtAuthResponse {
         this.token = token;
         this.email = email;
         this.id = id;
+        this.role = role;
     }
 
     public String getToken() {

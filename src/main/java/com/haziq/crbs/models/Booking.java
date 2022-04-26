@@ -25,12 +25,19 @@ public class Booking {
     @Enumerated(EnumType.STRING)
     private EBookingStatus bookingStatus;
 
-    @Column(name="book_rate")
-    private int bookRate;
+    @Column(name="book_score")
+    private int bookScore;
 
     @ManyToOne
     @JoinColumn(name="car_id", nullable = false)
     private Car car;
+
+    @ManyToOne
+    @JoinColumn(name="customer_id", nullable = false)
+    private Customer customer;
+
+    @Column(name="book_price_rate", nullable = true)
+    private Double bookRate;
 
     public Booking() {
     }
@@ -67,12 +74,12 @@ public class Booking {
         this.bookingStatus = bookingStatus;
     }
 
-    public int getBookRate() {
-        return bookRate;
+    public int getBookScore() {
+        return bookScore;
     }
 
-    public void setBookRate(int bookRate) {
-        this.bookRate = bookRate;
+    public void setBookScore(int bookScore) {
+        this.bookScore = bookScore;
     }
 
     public Car getCar() {
@@ -81,5 +88,21 @@ public class Booking {
 
     public void setCar(Car car) {
         this.car = car;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    public Double getBookRate() {
+        return bookRate;
+    }
+
+    public void setBookRate(Double bookRate) {
+        this.bookRate = bookRate;
     }
 }
