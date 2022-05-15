@@ -48,7 +48,12 @@ public class AuthController {
     final
     PasswordEncoder passwordEncoder;
 
-    public AuthController(CustomerRepository customerRepository, CarOwnerRepository carOwnerRepository, UserRepository userRepository, AuthenticationManager authenticationManager, JwtUtils jwtUtils, PasswordEncoder passwordEncoder) {
+    public AuthController(CustomerRepository customerRepository,
+                          CarOwnerRepository carOwnerRepository,
+                          UserRepository userRepository,
+                          AuthenticationManager authenticationManager,
+                          JwtUtils jwtUtils,
+                          PasswordEncoder passwordEncoder) {
         this.customerRepository = customerRepository;
         this.carOwnerRepository = carOwnerRepository;
         this.userRepository = userRepository;
