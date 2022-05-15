@@ -21,6 +21,11 @@ const NavbarHeader = () => {
                             <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
+                    <Nav>
+                        <img src="https://picsum.photos/200/200" className="rounded-circle"
+                             alt="profile-img" style={{width: 32, height: 32}} />
+                        <Nav.Link className={""}>Harry Potter</Nav.Link>
+                    </Nav>
                 </Navbar.Collapse>
             </Container>
         </Navbar>
