@@ -3,6 +3,7 @@ package com.haziq.crbs.modules.booking.entities;
 import com.haziq.crbs.modules.booking.repositories.EBookingStatus;
 import com.haziq.crbs.modules.accounts.customer.entities.Customer;
 import com.haziq.crbs.modules.car.entities.Car;
+import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -10,9 +11,10 @@ import java.util.Date;
 
 @Entity
 @Table(name="bookings")
+@Data
 public class Booking {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="booking_id")
     private Long id;
 

@@ -1,18 +1,22 @@
 package com.haziq.crbs.modules.car.entities;
 
+import com.haziq.crbs.common.GenericEntity;
 import com.haziq.crbs.modules.booking.entities.Booking;
 import com.haziq.crbs.modules.car.payloads.CarStatus;
 import com.haziq.crbs.modules.car.payloads.CarType;
 import com.haziq.crbs.modules.booking.repositories.RentalPrice;
 import com.haziq.crbs.modules.accounts.carOwner.entities.CarOwner;
+import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name="Cars")
-public class Car {
+@Data
+public class Car implements Serializable, GenericEntity<Car> {
     @Id
     @Column(name="car_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -62,129 +66,25 @@ public class Car {
     public Car() {
     }
 
-    public Car(Long id,
-               String carName,
-               String carBrand,
-               int carSeats,
-               String carColor,
-               String carTransmission,
-               String carDescription) {
-        this.id = id;
-        this.carName = carName;
-        this.carBrand = carBrand;
-        this.carSeats = carSeats;
-        this.carColor = carColor;
-        this.carTransmission = carTransmission;
-        this.carDescription = carDescription;
-    }
 
-    public Car(Long id,
-               String carName,
-               String carBrand,
-               int carSeats,
-               String carColor,
-               String carTransmission) {
-        this.id = id;
-        this.carName = carName;
-        this.carBrand = carBrand;
-        this.carSeats = carSeats;
-        this.carColor = carColor;
-        this.carTransmission = carTransmission;
+    @Override
+    public void update(Car source) {
+        this.carName  = source.getCarName();
+        this.carBrand = source.getCarBrand();
+        this.carSeats = source.getCarSeats();
+        this.carColor = source.getCarColor();
+        this.carTransmission = source.getCarTransmission();
     }
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    @Override
+    public Car createNewInstance() {
+        Car newInstance = new Car();
+        newInstance.update(this);
 
-    public String getCarName() {
-        return carName;
-    }
-
-    public void setCarName(String carName) {
-        this.carName = carName;
-    }
-
-    public String getCarBrand() {
-        return carBrand;
-    }
-
-    public void setCarBrand(String carBrand) {
-        this.carBrand = carBrand;
-    }
-
-    public int getCarSeats() {
-        return carSeats;
-    }
-
-    public void setCarSeats(int carSeats) {
-        this.carSeats = carSeats;
-    }
-
-    public String getCarColor() {
-        return carColor;
-    }
-
-    public void setCarColor(String carColor) {
-        this.carColor = carColor;
-    }
-
-    public String getCarTransmission() {
-        return carTransmission;
-    }
-
-    public void setCarTransmission(String carTransmission) {
-        this.carTransmission = carTransmission;
-    }
-
-    public String getCarDescription() {
-        return carDescription;
-    }
-
-    public void setCarDescription(String carDescription) {
-        this.carDescription = carDescription;
-    }
-
-    public Set<Booking> getBookings() {
-        return bookings;
-    }
-
-    public void setBookings(Set<Booking> bookings) {
-        this.bookings = bookings;
-    }
-
-    public Set<RentalPrice> getRentalPrices() {
-        return rentalPrices;
-    }
-
-    public void setRentalPrices(Set<RentalPrice> rentalPrices) {
-        this.rentalPrices = rentalPrices;
-    }
-
-    public CarType getCarType() {
-        return carType;
-    }
-
-    public void setCarType(CarType carType) {
-        this.carType = carType;
-    }
-
-    public CarOwner getCarOwner() {
-        return carOwner;
-    }
-
-    public void setCarOwner(CarOwner carOwner) {
-        this.carOwner = carOwner;
-    }
-
-    public CarStatus getCarStatus() {
-        return carStatus;
-    }
-
-    public void setCarStatus(CarStatus carStatus) {
-        this.carStatus = carStatus;
+        return newInstance;
     }
 }
