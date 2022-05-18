@@ -1,18 +1,22 @@
 package com.haziq.crbs.modules.accounts.customer.entities;
 
+import com.haziq.crbs.common.GenericEntity;
 import com.haziq.crbs.modules.booking.entities.Booking;
 import com.haziq.crbs.modules.accounts.generic.ERole;
 import com.haziq.crbs.modules.accounts.generic.User;
+import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
 @Table(name = "customers")
 @DiscriminatorValue(ERole.Values.ROLE_CUSTOMER)
-public class Customer extends User {
+@Data
+public class Customer extends User implements Serializable, GenericEntity<Customer> {
 
     @Column(name="ic", nullable = false)
     @NotBlank
@@ -39,27 +43,25 @@ public class Customer extends User {
         this.customerIc = customerIc;
     }
 
-    public String getCustomerIc() {
-        return customerIc;
+    @Override
+    public void update(Customer source) {
+        super.setUsername(source.getUsername());
+        super.setEmail(source.getEmail());
+        super.setPassword(source.getPassword());
+        super.setPhoneNumber(source.getPhoneNumber());
+        this.customerIc = source.getCustomerIc();
     }
 
-    public void setCustomerIc(String customerIc) {
-        this.customerIc = customerIc;
+    @Override
+    public Long getId() {
+        return this.getUserId();
     }
 
-    public String getCustomerLicense() {
-        return customerLicense;
-    }
+    @Override
+    public Customer createNewInstance() {
+        Customer newInstance = new Customer();
+        newInstance.update(this);
 
-    public void setCustomerLicense(String customerLicense) {
-        this.customerLicense = customerLicense;
-    }
-
-    public Date getCustomerExpLicense() {
-        return customerExpLicense;
-    }
-
-    public void setCustomerExpLicense(Date customerExpLicense) {
-        this.customerExpLicense = customerExpLicense;
+        return newInstance;
     }
 }

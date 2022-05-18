@@ -1,5 +1,7 @@
 package com.haziq.crbs.modules.booking.controllers;
 
+import com.haziq.crbs.common.GenericController;
+import com.haziq.crbs.common.GenericRepository;
 import com.haziq.crbs.modules.booking.entities.Booking;
 import com.haziq.crbs.modules.car.entities.Car;
 import com.haziq.crbs.modules.accounts.customer.entities.Customer;
@@ -24,7 +26,7 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @CrossOrigin(origins="*", maxAge = 3600)
 @RequestMapping(value="/api/booking/")
-public class BookingController {
+public class BookingController extends GenericController<Booking> {
     @Autowired
     CarRepository carRepository;
 
@@ -36,6 +38,10 @@ public class BookingController {
 
     @Autowired
     RentalPriceRepository rentalPriceRepository;
+
+    public BookingController(BookingRepository bookingRepository) {
+        super(bookingRepository);
+    }
 
     @PostMapping(value="book-car")
     public ResponseEntity<?> createBooking(@Valid @RequestBody BookingRequest request) {

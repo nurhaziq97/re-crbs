@@ -5,6 +5,7 @@ import NavbarHeader from "./components/Navbar.component";
 import {useDispatch, useSelector} from "react-redux";
 import {useCallback, useEffect, useState} from "react";
 import {clearMessage} from "./actions/message";
+import {history} from "./helpers/history";
 
 const App = () => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);

@@ -1,13 +1,18 @@
 package com.haziq.crbs.modules.accounts.generic;
 
+import com.haziq.crbs.common.GenericEntity;
+import lombok.Data;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "users")
 @DiscriminatorColumn(name="role")
+@Data
 public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
