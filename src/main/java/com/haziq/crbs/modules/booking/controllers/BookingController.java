@@ -10,7 +10,7 @@ import com.haziq.crbs.modules.booking.payloads.BookingRequest;
 import com.haziq.crbs.common.MessageResponse;
 import com.haziq.crbs.modules.booking.repositories.BookingRepository;
 import com.haziq.crbs.modules.car.repositories.CarRepository;
-import com.haziq.crbs.modules.accounts.admin.repositories.CustomerRepository;
+import com.haziq.crbs.modules.accounts.customer.repositories.CustomerRepository;
 import com.haziq.crbs.modules.booking.repositories.RentalPriceRepository;
 import com.haziq.crbs.config.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,20 +27,20 @@ import java.util.concurrent.TimeUnit;
 @CrossOrigin(origins="*", maxAge = 3600)
 @RequestMapping(value="/api/booking/")
 public class BookingController extends GenericController<Booking> {
-    @Autowired
+    final
     CarRepository carRepository;
 
-    @Autowired
+    final
     CustomerRepository customerRepository;
 
-    @Autowired
-    BookingRepository bookingRepository;
-
-    @Autowired
+    final
     RentalPriceRepository rentalPriceRepository;
 
-    public BookingController(BookingRepository bookingRepository) {
+    public BookingController(BookingRepository bookingRepository, RentalPriceRepository rentalPriceRepository, CarRepository carRepository, CustomerRepository customerRepository) {
         super(bookingRepository);
+        this.rentalPriceRepository = rentalPriceRepository;
+        this.carRepository = carRepository;
+        this.customerRepository = customerRepository;
     }
 
     @PostMapping(value="book-car")
@@ -87,7 +87,6 @@ public class BookingController extends GenericController<Booking> {
             booking.setBookRate(price);
         }
 
-        bookingRepository.save(booking);
         return ResponseEntity.ok("Booking Successfully Made");
     }
 }

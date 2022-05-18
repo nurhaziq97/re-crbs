@@ -8,7 +8,7 @@ import com.haziq.crbs.modules.authentication.payloads.RegisterCustomerRequest;
 import com.haziq.crbs.modules.authentication.payloads.JwtAuthResponse;
 import com.haziq.crbs.common.MessageResponse;
 import com.haziq.crbs.modules.accounts.carOwner.repositories.CarOwnerRepository;
-import com.haziq.crbs.modules.accounts.admin.repositories.CustomerRepository;
+import com.haziq.crbs.modules.accounts.customer.repositories.CustomerRepository;
 import com.haziq.crbs.modules.accounts.generic.UserRepository;
 import com.haziq.crbs.config.security.jwt.JwtUtils;
 import com.haziq.crbs.config.security.services.UserDetailsImpl;
